@@ -14,7 +14,7 @@ function listArticle()
     $commentRepository = new CommentRepository();
     $commentList = $commentRepository->getAllComment();
 
-    require('./View/test.php');
+    require('./index2.php');
     
 }
 

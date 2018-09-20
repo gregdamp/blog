@@ -71,76 +71,26 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <?php if (isset($_SESSION['pseudo'])) { ?><h1>Bonjour <?php echo $_SESSION['pseudo']; ?>  !</h1><?php } ?>
-        
-        <?php foreach($articleList as $article) {
-
-        	echo '<div class="post-preview">';
-            echo '<a href="post.html">';
-            echo '<h2 class="post-title">';
-                 echo $article->getTitle();
-            echo '</h2>';
-            echo '<h3 class="post-subtitle">';
-            	 echo  $article->getDescription();
-            echo '</h3>';
-            echo '</a>';
-            echo '<p class="post-meta">';
-            echo 'Publié par' . $article->getPseudoUser();
-            echo 'le' . $article->getPublishedDate() . '</p>';
-          	echo '</div>';
-          	echo '<br>' . '<br>';
-
-            if (isset($_SESSION['pseudo'])) {
-            	echo '<a href="./View/addComment.php?id=' . $article->getId() . '">Ajouter un commentaire</a>'  . '<br>';
-            }
-
-            foreach($commentList as $comment) {
-                if ($article->getId() == $comment->getIdArticle() && $comment->getIsModerate() == 1 && $comment->getWarning() == 0) {
-            		echo $comment->getDescription() . $comment->getPseudoUser() . '<a href="index.php?action=warningComment&id=' . $comment->getIdComment() . '"><img src="public/img/warning.png"></a>' . '<br>';
-                }
-
-                if ($article->getId() == $comment->getIdArticle() && $comment->getIsModerate() == 1 && $comment->getWarning() != 0) {
-            		echo $comment->getDescription() . $comment->getPseudoUser(). '<br>';
-                }
-
-            }
-
-            if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true) {
-                echo '<a href="index.php?action=deleteArticle&id=' . $article->getId() . '">Supprimer</a>'  . '<br>';
-                echo '<a href="index.php?action=editArticle&id=' . $article->getId() . '">Modifier</a>'  . '<br>';
-                foreach($commentList as $comment) {
-                    if ($article->getId() == $comment->getIdArticle() && $comment->getIsModerate() == 0) {
-            echo $comment->getDescription() . $comment->getPseudoUser() . '<a href="index.php?action=deleteComment&id=' . $comment->getIdComment() . '"><img src="public/img/rouge.png"></a>
-            <a href="index.php?action=updateComment&id=' . $comment->getIdComment() . '"><img src="public/img/vert.png"></a>' . '<br>';
-                    }
-                    if ($article->getId() == $comment->getIdArticle() && $comment->getIsModerate() == 1 && $comment->getWarning() == 1) {
-            echo $comment->getDescription() . $comment->getPseudoUser() . '<img src="public/img/warning.png"><a href="index.php?action=deleteComment&id=' . $comment->getIdComment() . '"><img src="public/img/rouge.png"></a>
-            <a href="index.php?action=validComment&id=' . $comment->getIdComment() . '"><img src="public/img/vert.png"></a>' . '<br>';
-                    }            
-                }
-            echo '<br>' . '<br>';    
-            }
-        echo '<hr>';    
-        }
-
-        
-        
-        if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true) {
-        echo '<a href="./View/addArticle.php">Ajouter</a>';
-        }
-
-        ?>
-		       
           
-          <!-- Pager -->
-          <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+		       <form action="../index.php?action=addArticle" method="post">
+          <div>
+            <label for="title">Titre : </label>
+            <input id="title" name="title" type="text" placeholder="Titre" required data-validation-required-message="Merci de donner un titre.">
           </div>
+
+          <div>  
+            <label for="description">Description : </label>
+            <textarea id="description" name="description" rows="4" cols="50"></textarea> 
+          </div>
+
+          <div>
+                <button type="submit" id="send">Envoyer</button>
+          </div>
+    </form>
+  
         </div>
       </div>
     </div>
-
-    <hr>
 
     <!-- Footer -->
     <footer>
