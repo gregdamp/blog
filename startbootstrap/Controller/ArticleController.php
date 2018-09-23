@@ -1,8 +1,8 @@
 <?php
 
-use \gregdamp\Model\ArticleRepository;
-use \gregdamp\Model\UserRepository;
-use \gregdamp\Model\CommentRepository;
+use blog\startbootstrap\Model\ArticleRepository;
+use blog\startbootstrap\Model\UserRepository;
+use blog\startbootstrap\Model\CommentRepository;
 
 require('./Model/ArticleRepository.php');
 
@@ -14,7 +14,7 @@ function listArticle()
     $commentRepository = new CommentRepository();
     $commentList = $commentRepository->getAllComment();
 
-    require('./index2.php');
+    require('./View/home.php');
     
 }
 
@@ -38,7 +38,7 @@ function editArticle() {
     $userRepository = new UserRepository();
     $userList = $userRepository->findAll();
     
-    require('./View/editArticle.php');
+    require('./View/editArticleForm.php');
 }
 
 function updateArticle() {

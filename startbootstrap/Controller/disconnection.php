@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header('Location: /gregdamp/index.php');
+header('Location: /blog/startbootstrap/index.php');
 
 ?>

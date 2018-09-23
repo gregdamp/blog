@@ -1,6 +1,6 @@
 <?php
 
-use \gregdamp\Model\UserRepository;
+use blog\startbootstrap\Model\UserRepository;
 
 require('./Model/UserRepository.php');
 

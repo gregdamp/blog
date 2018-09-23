@@ -1,6 +1,6 @@
 <?php
 
-namespace gregdamp\Model;
+namespace blog\startbootstrap\Model;
 
 use PDO;
 
@@ -24,7 +24,7 @@ class CommentRepository extends Repository {
 
         $req->execute();
         
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
 
@@ -67,7 +67,7 @@ class CommentRepository extends Repository {
 
         $req->execute();
 
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
     }
 
     public function updateComment() {
@@ -80,7 +80,7 @@ class CommentRepository extends Repository {
 
         $stmt->execute(array($_SESSION['idComment']));
 
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
 
@@ -94,7 +94,7 @@ class CommentRepository extends Repository {
 
         $stmt->execute(array($_SESSION['idComment']));
 
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
 
@@ -108,7 +108,7 @@ class CommentRepository extends Repository {
 
         $stmt->execute(array($_SESSION['idComment']));
 
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
 

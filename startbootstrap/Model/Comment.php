@@ -1,6 +1,6 @@
 <?php
 
-namespace gregdamp\Model;
+namespace blog\startbootstrap\Model;
 
 class Comment
 {

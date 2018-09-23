@@ -1,6 +1,6 @@
 <?php
 
-use \gregdamp\Model\CommentRepository;
+use blog\startbootstrap\Model\CommentRepository;
 
 require('./Model/CommentRepository.php');
 

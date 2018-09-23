@@ -1,6 +1,6 @@
 <?php
 
-namespace gregdamp\Model;
+namespace blog\startbootstrap\Model;
 
 use PDO;
 
@@ -24,7 +24,7 @@ class UserRepository extends Repository {
         
         $req->execute();
         
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
 
@@ -50,7 +50,7 @@ class UserRepository extends Repository {
         $_SESSION['isAdmin']=$data['isAdmin'];
         $_SESSION['idUser']=$data['idUser'];
 
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
 	}
 
 	function findAll()

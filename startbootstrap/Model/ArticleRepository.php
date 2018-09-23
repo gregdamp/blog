@@ -1,6 +1,6 @@
 <?php
 
-namespace gregdamp\Model;
+namespace blog\startbootstrap\Model;
 
 use PDO;
 
@@ -50,7 +50,7 @@ class ArticleRepository extends Repository {
         
         $req->execute();
         
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
     
@@ -67,7 +67,7 @@ class ArticleRepository extends Repository {
 
         $req->execute();
 
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
     
@@ -81,7 +81,7 @@ class ArticleRepository extends Repository {
 
         $stmt->execute(array($_SESSION['title'], $_SESSION['description'], $_SESSION['idUser'], $_SESSION['id']));
 
-        header('Location: /gregdamp/index.php');
+        header('Location: /blog/startbootstrap/index.php');
         
     }
     
