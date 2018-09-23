@@ -72,21 +72,16 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           
-		       <form action="../index.php?action=addArticle" method="post">
-          <div>
-            <label for="title">Titre : </label>
-            <input id="title" name="title" type="text" placeholder="Titre" required data-validation-required-message="Merci de donner un titre.">
-          </div>
+		      <form action="../index.php?action=addComment&id=<?php echo $_GET['id']; ?>" method="post">
+            <div>  
+              <label for="description">Description : </label>
+              <textarea id="description" name="description" rows="4" cols="50"></textarea> 
+            </div>
 
-          <div>  
-            <label for="description">Description : </label>
-            <textarea id="description" name="description" rows="4" cols="50"></textarea> 
-          </div>
-
-          <div>
+            <div>
                 <button type="submit" id="send">Envoyer</button>
-          </div>
-    </form>
+            </div>
+          </form>
   
         </div>
       </div>
