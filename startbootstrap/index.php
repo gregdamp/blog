@@ -26,6 +26,13 @@ try {
             
             deleteArticle();
         }
+
+        else if ($_GET['action'] == 'getArticle') {
+
+            $_SESSION['idArticle'] = $_GET['id'];
+            
+            getArticle();
+        }
         
         else if ($_GET['action'] == 'editArticle') {
             

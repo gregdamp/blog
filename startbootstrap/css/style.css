@@ -1,0 +1,29 @@
+.usercomment 
+	{
+		color: grey;
+	}
+
+.commentdescription 
+	{
+		font-style : italic;
+	}
+
+.quote 
+	{
+		quotes: "„" "“";
+	}
+
+form 
+	{
+		display: flex;
+		flex-direction: row;
+	}
+
+fieldset
+	{
+		color: white;
+	}
+.connectinput
+	{
+		margin-right: 1px;
+	}

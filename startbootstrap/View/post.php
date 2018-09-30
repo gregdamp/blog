@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bienvenue sur le blog de Tdamp</title>
+    <title>Clean Blog - Start Bootstrap Theme</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,34 +29,16 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        
+        <a class="navbar-brand" href="index.php">Jean Forteroche</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item"> 
               <a class="nav-link" href="index.php">Accueil</a>
             </li>
-          </ul>
-          <?php if (!isset($_SESSION['pseudo'])) { ?>
-            <div id="connect">
-                <form method="post" action="index.php?action=connectUser">
-                    <fieldset>Pseudo : <input type="text" name="pseudo" class="connectinput"/></fieldset>
-                    <fieldset>Mot de passe : <input type="password" name="password"/></fieldset>
-                    <input type="submit" name="submit" value="Se connecter"/>
-                    <a href="./View/addUserForm.php">S'enregistrer</a>
-                </form>
-            </div>
-
-        <?php } else { ?> 
-            <div id="disconnect">
-                <form method="post" action="Controller/disconnection.php">
-                    <input type="submit" name="submit" value="Se déconnecter"/>
-                </form>
-            </div>
-        <?php } ?>
         </div>
       </div>
     </nav>
@@ -67,55 +49,53 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="site-heading">
-              <h1>Billet simple pour l'Alaska</h1>
-              <span class="subheading">Jean forteroche</span>
+            <div class="post-heading">
+              <?php
+                echo '<h1>' . $article->getTitle() . '</h1>';
+              ?>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <?php if (isset($_SESSION['pseudo'])) { ?><h1>Bonjour <?php echo $_SESSION['pseudo']; ?>  !</h1><?php } ?>
-        
-        <?php foreach($articleList as $article) {
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <?php
 
-        	echo '<div class="post-preview">';
-            echo '<a href="index.php?action=getArticle&id=' . $article->getId() . '">';
+          echo '<div class="post-preview">';
             echo '<h2 class="post-title">';
                  echo $article->getTitle();
             echo '</h2>';
-            echo '<h3 class="post-subtitle">';
-            	 echo substr($article->getDescription(), 0, 100) . '...';
-            echo '</h3>';
-            echo '</a>';
+            echo '<p class="post-subtitle">';
+               echo $article->getDescription();
+            echo '</p>';
             echo '<p class="post-meta">';
             echo 'Publié par ' . $article->getPseudoUser();
             echo ' le ' . $article->getPublishedDate() . '</p>';
-          	echo '</div>';
-          	echo '<br>' . '<br>';
+            echo '</div>';
+            echo '<br>' . '<br>';
 
             if (isset($_SESSION['pseudo'])) {
-            	echo '<a href="./View/addCommentForm.php?id=' . $article->getId() . '">Ajouter un commentaire</a>'  . '<br><br>';
+              echo '<a href="./View/addCommentForm.php?id=' . $article->getId() . '">Ajouter un commentaire</a>'  . '<br>';
             }
 
             foreach($commentList as $comment) {
                 if ($article->getId() == $comment->getIdArticle() && $comment->getIsModerate() == 1 && $comment->getWarning() == 0) {
-            		echo '<span class="commentdescription"><q class="quote">' . $comment->getDescription() . '</q></span>' . ' de ' . '<span class="usercomment">' . $comment->getPseudoUser() . '</span>' . '<a href="index.php?action=warningComment&id=' . $comment->getIdComment() . '"><img src="img/warning.png"></a>' . '<br>';
+                echo '<span class="commentdescription"><q class="quote">' . $comment->getDescription() . '</q></span>' . ' de ' . '<span class="usercomment">' . $comment->getPseudoUser() . '</span>' . '<a href="index.php?action=warningComment&id=' . $comment->getIdComment() . '"><img src="img/warning.png"></a>' . '<br>';
                 }
 
                 if ($article->getId() == $comment->getIdArticle() && $comment->getIsModerate() == 1 && $comment->getWarning() != 0) {
-            		echo '<span class="commentdescription"><q class="quote">' . $comment->getDescription() . '</q></span>' . ' de ' . '<span class="usercomment">' . $comment->getPseudoUser() . '</span>' . '<br>';
+                echo '<span class="commentdescription"><q class="quote">' . $comment->getDescription() . '</q></span>' . ' de ' . '<span class="usercomment">' . $comment->getPseudoUser() . '</span>' . '<br>';
                 }
 
             }
 
             if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true) {
-                echo '<br><a href="index.php?action=deleteArticle&id=' . $article->getId() . '">Supprimer</a>'  . '<br>';
+                echo '<a href="index.php?action=deleteArticle&id=' . $article->getId() . '">Supprimer</a>'  . '<br>';
                 echo '<a href="index.php?action=editArticle&id=' . $article->getId() . '">Modifier</a>'  . '<br>';
                 foreach($commentList as $comment) {
                     if ($article->getId() == $comment->getIdArticle() && $comment->getIsModerate() == 0) {
@@ -130,7 +110,7 @@
             echo '<br>' . '<br>';    
             }
         echo '<hr>';    
-        }
+        
 
         
         
@@ -139,15 +119,10 @@
         }
 
         ?>
-		       
-          
-          <!-- Pager -->
-          <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Articles précédents &rarr;</a>
           </div>
         </div>
       </div>
-    </div>
+    </article>
 
     <hr>
 

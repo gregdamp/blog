@@ -6,8 +6,8 @@ use blog\startbootstrap\Model\CommentRepository;
 
 require('./Model/ArticleRepository.php');
 
-function listArticle()
-{
+function listArticle() {
+
     $articleRepository = new ArticleRepository();
     $articleList = $articleRepository->findAll();
 
@@ -17,6 +17,18 @@ function listArticle()
     require('./View/home.php');
     
 }
+
+function getArticle() {
+
+    $articleRepository = new ArticleRepository();
+    $article = $articleRepository->getArticle($_SESSION['idArticle']);
+
+    $commentRepository = new CommentRepository();
+    $commentList = $commentRepository->getCommentByArticle($_SESSION['idArticle']);
+
+    require('./View/post.php');
+
+}    
 
 function addArticle() {
     

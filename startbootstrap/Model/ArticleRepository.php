@@ -34,6 +34,26 @@ class ArticleRepository extends Repository {
         
 	}
 
+    function getArticle($id)
+    {
+        $db = $this->dbConnect();
+
+        
+        $req = $db->query('SELECT * FROM article INNER JOIN user ON article.idUser = user.idUser WHERE idArticle=' . $id . ' ORDER BY publishedDate DESC');     
+        $req->execute();
+                
+        
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        
+            
+        $article = new Article($data['idArticle'], $data['title'], $data['description'], $data['publishedDate'], $data['idUser'], $data['pseudo']);                  
+        
+        $req->closeCursor();
+
+        return $article;
+        
+    }
+
     public function addArticle()
     {
         $db = $this->dbConnect();

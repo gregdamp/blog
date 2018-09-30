@@ -54,6 +54,32 @@ class CommentRepository extends Repository {
 		return $commentList;
     }
 
+    public function getCommentByArticle($id) {
+
+        $db = $this->dbConnect();
+        
+        $reqSelect = 'SELECT * FROM comment INNER JOIN user ON comment.idUser = user.idUser WHERE idArticle=' . $id . ' ORDER BY publishedDate DESC';
+        $req = $db->prepare($reqSelect);
+        
+        $req->execute();
+
+
+       $commentList = [];
+        
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) 
+        {
+            
+            $comment = new Comment($data['idComment'], $data['publishedDate'], $data['isModerate'], $data['parentId'], $data['idUser'],  $data['idArticle'], $data['description'], $data['warning'], $data['pseudo']);
+            
+            $commentList[] = $comment;
+
+        }
+        
+        $req->closeCursor();
+
+        return $commentList;
+    }
+
     public function deleteComment() {
         
         $db = $this->dbConnect();
